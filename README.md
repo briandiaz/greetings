@@ -29,7 +29,10 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-4. Run project
+4. Place photos from people you want to greet at `/assets` path.
+Should be image file and name you be person's name.
+
+5. Run project
 
 ```sh
 python3 main.py

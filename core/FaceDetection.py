@@ -21,7 +21,6 @@ class FaceDetection():
         if boundingBoxLocation.xmin > 0:
           boundingBox = int(boundingBoxLocation.xmin * imageWidth), int(boundingBoxLocation.ymin * imageHeight), \
                 int(boundingBoxLocation.width * imageWidth), int(boundingBoxLocation.height * imageHeight)
-
           face = Face(index + 1, detection.score[0], boundingBox)
 
           faces.append(face)
@@ -32,7 +31,6 @@ class FaceDetection():
     lineWidth = 3
 
     for _, face in enumerate(faces):
-      print(face)
       x, y, w, h = face.boundingBox
       x1, y1 = x + w, y + h
       cv2.rectangle(self.image, (x1, y), (x, y1), (255, 0, 255), lineWidth)

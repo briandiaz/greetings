@@ -24,7 +24,7 @@ def main():
       detector.draw(faces)
 
       if faces and doRecognition == True:
-        thread1 = threading.Thread(target=faceRecognition.detect, args=(image, event))
+        thread1 = threading.Thread(target=faceRecognition.detect_and_greet, args=(image, event))
         thread1.start()
         startTime = time.time()
 

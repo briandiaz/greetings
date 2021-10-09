@@ -38,6 +38,12 @@ Should be image file and name you be person's name.
 python3 main.py
 ```
 
+*Note*: If you're on a Linux system and the voice output is not working with this library, then you should install espeak, ffmpeg and libespeak1:
+
+```sh
+sudo apt update && sudo apt install espeak ffmpeg libespeak1
+```
+
 # Author
 
 Brian Díaz / [@briandiaz](https://briandiaz.me/)

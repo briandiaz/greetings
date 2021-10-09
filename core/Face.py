@@ -1,4 +1,3 @@
-
 class Face:
   def __init__(self, id, score, boundingBox):
     self.id = id

@@ -29,6 +29,12 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
+4. Run project
+
+```sh
+python3 main.py
+```
+
 # Author
 
 Brian Díaz / [@briandiaz](https://briandiaz.me/)

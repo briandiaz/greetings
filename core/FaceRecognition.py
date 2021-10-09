@@ -3,6 +3,9 @@ import face_recognition
 from os import listdir
 from os.path import isfile, join
 from core.Subject import Subject
+import pyttsx3
+
+engine = pyttsx3.init()
 
 __ASSETS_PATH__ = './assets'
 
@@ -39,7 +42,11 @@ class FaceRecognition:
 
     return fileNameDuple
 
-  def detect(self, image, event):
+  def __greet__(self, text):
+    engine.say(text)
+    engine.runAndWait()
+
+  def detect_and_greet(self, image, event):
     imageTest = image
     imageTest = cv2.cvtColor(imageTest, cv2.COLOR_BGR2RGB)
     locations = face_recognition.face_locations(imageTest)
@@ -54,8 +61,9 @@ class FaceRecognition:
         if results == True and faceDis >= 0.0 and faceDis <= self.minDetectionConfidence:
           text = f'Hello {subject.name}, I can see you!'
           event.set()
+          self.__greet__(text)
         else:
-          text = 'Intruder'
+          text = "Intruder"
 
         print(text)
 

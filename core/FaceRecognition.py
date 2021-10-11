@@ -58,7 +58,7 @@ class FaceRecognition:
         results = face_recognition.compare_faces([subject.face_encoding], encode_test)[0]
         face_distance = face_recognition.face_distance([subject.face_encoding], encode_test)[0]
 
-        if results is True and face_distance >= 0.0 and \
+        if results == True and face_distance >= 0.0 and \
           face_distance <= self.min_detection_confidence:
           text = f'Hello {subject.name}, I can see you!'
           event.set()

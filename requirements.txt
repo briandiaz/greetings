@@ -3,3 +3,4 @@ mediapipe==0.8.8
 numpy==1.21.2
 opencv-contrib-python==3.4.4.19
 pyttsx3==2.90
+pylint==2.11.1

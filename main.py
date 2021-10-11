@@ -1,8 +1,8 @@
-import cv2
+import threading
 import time
+import cv2
 from core.FaceDetection import FaceDetection
 from core.FaceRecognition import FaceRecognition
-import threading
 
 def main():
   video_capture = cv2.VideoCapture(0) # Initialize instance of videoCapture with Default WebCamera
@@ -10,10 +10,11 @@ def main():
   time.sleep(5) # Wait Camera to respond in 5 seconds
 
   detector = FaceDetection() # Initialize detector
-  faceRecognition = FaceRecognition()
-  doRecognition = True
-  event = threading.Event() # Lets create a thread to process facial recognition as it takes too much resources
-  startTime = time.time()
+  face_recognition = FaceRecognition()
+  do_recognition = True
+  # Lets create a thread to process facial recognition as it takes too much resources
+  event = threading.Event()
+  start_time = time.time()
 
   while True:
     is_read, image = video_capture.read()
@@ -23,14 +24,14 @@ def main():
       # Draw Faces in the image
       detector.draw(faces)
 
-      if faces and doRecognition == True:
-        thread1 = threading.Thread(target=faceRecognition.detect_and_greet, args=(image, event))
+      if faces and do_recognition is True:
+        thread1 = threading.Thread(target=face_recognition.detect_and_greet, args=(image, event))
         thread1.start()
-        startTime = time.time()
+        start_time = time.time()
 
-      endTime = time.time()
-      timeElapsed = (endTime - startTime)
-      doRecognition = timeElapsed > 5 # Start recoginition process every 5 seconds
+      end_time = time.time()
+      time_elapsed = (end_time - start_time)
+      do_recognition = time_elapsed > 5 # Start recoginition process every 5 seconds
 
       # Show result
       cv2.imshow("Greetings", image)
@@ -41,7 +42,7 @@ def main():
     key = cv2.waitKey(30) & 0xff
     if key == 27: # When escape key is pressed video ends and opencv window is closed.
       break
-  
+
   video_capture.release()
   cv2.destroyAllWindows()
 

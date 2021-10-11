@@ -54,4 +54,4 @@ sudo apt update && sudo apt install espeak ffmpeg libespeak1
 
 # Author
 
-Brian Díaz / [@briandiaz](https://briandiaz.me/)
+Brian Díaz / [@briandiaz](https://www.briandiaz.me/)

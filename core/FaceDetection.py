@@ -3,35 +3,36 @@ import mediapipe as mp
 from core.Face import Face
 
 class FaceDetection():
-  def __init__(self, minDetectionConfidence=0.5):
-    self.minDetectionConfidence = minDetectionConfidence
-    self.faceDetection = mp.solutions.face_detection.FaceDetection(self.minDetectionConfidence)
+  def __init__(self, min_detection_confidence=0.5):
+    self.min_detection_confidence = min_detection_confidence
+    self.face_detection = mp.solutions.face_detection.FaceDetection(self.min_detection_confidence)
+    self.image = None
 
-  def findFaces(self, image):
+  def find_faces(self, image):
     self.image = image
-    imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    detectionProcess = self.faceDetection.process(imageRGB)
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    detection_process = self.face_detection.process(image_rgb)
     faces = []
 
-    if detectionProcess.detections:
-      for index, detection in enumerate(detectionProcess.detections):
-        boundingBoxLocation = detection.location_data.relative_bounding_box
-        imageHeight, imageWidth, _ = image.shape
+    if detection_process.detections:
+      for index, detection in enumerate(detection_process.detections):
+        bounding_box_location = detection.location_data.relative_bounding_box
+        image_height, image_width, _ = image.shape
 
-        if boundingBoxLocation.xmin > 0:
-          boundingBox = int(boundingBoxLocation.xmin * imageWidth), int(boundingBoxLocation.ymin * imageHeight), \
-                int(boundingBoxLocation.width * imageWidth), int(boundingBoxLocation.height * imageHeight)
-          face = Face(index + 1, detection.score[0], boundingBox)
+        if bounding_box_location.xmin > 0:
+          bounding_box = int(bounding_box_location.xmin * image_width), int(bounding_box_location.ymin * image_height), \
+                int(bounding_box_location.width * image_width), int(bounding_box_location.height * image_height)
+          face = Face(index + 1, detection.score[0], bounding_box)
 
           faces.append(face)
 
     return faces
 
   def draw(self, faces):
-    lineWidth = 3
+    line_width = 3
 
     for _, face in enumerate(faces):
-      x, y, w, h = face.boundingBox
-      x1, y1 = x + w, y + h
-      cv2.rectangle(self.image, (x1, y), (x, y1), (255, 0, 255), lineWidth)
+      x_pos, y_pos, width, heigth = face.bounding_box
+      x1_pos, y1_pos = x_pos + width, y_pos + heigth
+      cv2.rectangle(self.image, (x1_pos, y_pos), (x_pos, y1_pos), (255, 0, 255), line_width)
  

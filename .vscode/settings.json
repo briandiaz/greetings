@@ -1,5 +1,7 @@
 {
   "python.analysis.extraPaths": [
     "./core"
-  ]
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }

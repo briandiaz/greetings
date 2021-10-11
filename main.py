@@ -20,7 +20,7 @@ def main():
     is_read, image = video_capture.read()
     if is_read:
       # Find all faces in the image
-      faces = detector.findFaces(image)
+      faces = detector.find_faces(image)
       # Draw Faces in the image
       detector.draw(faces)
 
